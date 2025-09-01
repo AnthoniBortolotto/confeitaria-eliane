@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BaseTitle from '../atoms/BaseTitle.vue'
-import BaseText from '../atoms/BaseText.vue'
+import BaseTitle from '../../atoms/BaseTitle/BaseTitle.vue'
+import BaseText from '../../atoms/BaseText/BaseText.vue'
 
 interface Props {
   title: string

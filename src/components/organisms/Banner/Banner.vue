@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BannerContent from '../molecules/BannerContent.vue'
+import BannerContent from '@/components/molecules/BannerContent/BannerContent.vue'
 
 defineOptions({
   name: 'WeeklyBanner',

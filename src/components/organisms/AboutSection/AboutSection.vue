@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BaseTitle from '../atoms/BaseTitle.vue'
-import BaseText from '../atoms/BaseText.vue'
+import BaseText from '@/components/atoms/BaseText/BaseText.vue'
+import BaseTitle from '@/components/atoms/BaseTitle/BaseTitle.vue'
 
 defineOptions({
   name: 'AboutSection',
