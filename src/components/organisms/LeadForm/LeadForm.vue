@@ -69,7 +69,9 @@ function handleFieldBlur(field: keyof CreateLeadErrorsDTO) {
     errors.value.nome = CreateLeadDTOValidator.validateNome(formData.nome)
   }
   if (field === 'telefone') {
-    errors.value.telefone = CreateLeadDTOValidator.validateTelefone(formData.telefone)
+    errors.value.telefone = CreateLeadDTOValidator.validateTelefone(
+      formData.telefone.replace(/[^\d]/g, ''),
+    )
   }
   if (field === 'pedido') {
     errors.value.pedido = CreateLeadDTOValidator.validatePedido(formData.pedido)

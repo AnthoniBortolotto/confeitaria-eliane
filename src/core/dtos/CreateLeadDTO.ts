@@ -1,3 +1,5 @@
+import { nameRegex, quantityRegex, phoneRegex } from '../utils/regex'
+
 export interface CreateLeadDTO {
   nome: string
   telefone: string
@@ -17,31 +19,6 @@ export class CreateLeadErrorsDTO {
 }
 
 export class CreateLeadDTOValidator {
-  static validate(dto: CreateLeadDTO): { isValid: boolean; errors: string[] } {
-    const errors: string[] = []
-
-    if (!dto.nome || dto.nome.trim().length === 0) {
-      errors.push('Nome é obrigatório')
-    }
-
-    if (!dto.telefone || dto.telefone.trim().length === 0) {
-      errors.push('Telefone é obrigatório')
-    }
-
-    if (!dto.pedido || dto.pedido.trim().length === 0) {
-      errors.push('Pedido é obrigatório')
-    }
-
-    if (!dto.quantidade || dto.quantidade.trim().length === 0) {
-      errors.push('Quantidade é obrigatória')
-    }
-
-    return {
-      isValid: errors.length === 0,
-      errors,
-    }
-  }
-
   static validateAll(dto: CreateLeadDTO): { isValid: boolean; errors: CreateLeadErrorsDTO } {
     const errors = CreateLeadErrorsDTO.create()
 
@@ -59,29 +36,39 @@ export class CreateLeadDTOValidator {
   }
 
   static validateNome(nome: string): string {
-    if (!nome || nome.trim().length === 0) {
+    if (!nome.trim()) {
       return 'Nome é obrigatório'
+    }
+    if (!nameRegex.test(nome)) {
+      return 'Nome inválido'
     }
     return ''
   }
 
   static validateTelefone(telefone: string): string {
-    if (!telefone || telefone.trim().length === 0) {
+    if (!telefone.trim()) {
       return 'Telefone é obrigatório'
+    }
+    if (!phoneRegex.test(telefone)) {
+      return 'Telefone inválido'
     }
     return ''
   }
 
   static validatePedido(pedido: string): string {
-    if (!pedido || pedido.trim().length === 0) {
+    if (!pedido.trim()) {
       return 'Pedido é obrigatório'
     }
+
     return ''
   }
 
   static validateQuantidade(quantidade: string): string {
-    if (!quantidade || quantidade.trim().length === 0) {
+    if (!quantidade.trim()) {
       return 'Quantidade é obrigatória'
+    }
+    if (!quantityRegex.test(quantidade)) {
+      return 'Quantidade inválida'
     }
     return ''
   }
