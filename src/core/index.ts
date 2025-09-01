@@ -14,4 +14,6 @@ export { CreateLeadDTOValidator, CreateLeadErrorsDTO } from './dtos/CreateLeadDT
 
 // Infrastructure
 export { HttpLeadRepository } from './infrastructure/HttpLeadRepository'
-export { HttpLeadGateway } from './infrastructure/HttpLeadGateway'
+
+// Utils
+export { PhoneMasks } from './utils/phoneMask'

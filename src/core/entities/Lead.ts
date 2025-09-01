@@ -1,3 +1,5 @@
+import { PhoneMasks } from '../utils/phoneMask'
+
 export class Lead {
   constructor(
     private readonly _nome: string,
@@ -12,6 +14,10 @@ export class Lead {
 
   get telefone(): string {
     return this._telefone
+  }
+
+  get telefoneNumeros(): string {
+    return PhoneMasks.unMaskPhone(this._telefone)
   }
 
   get pedido(): string {
@@ -46,6 +52,7 @@ export class Lead {
     return {
       nome: this._nome,
       telefone: this._telefone,
+      telefoneNumeros: this.telefoneNumeros,
       pedido: this._pedido,
       quantidade: this._quantidade,
     }

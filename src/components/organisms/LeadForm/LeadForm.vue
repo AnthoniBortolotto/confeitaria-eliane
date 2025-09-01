@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { Lead, type CreateLeadDTO, CreateLeadDTOValidator, CreateLeadUseCase } from '@/core'
+import {
+  Lead,
+  type CreateLeadDTO,
+  CreateLeadDTOValidator,
+  CreateLeadUseCase,
+  PhoneMasks,
+} from '@/core'
 import { HttpLeadGateway } from '@/core/infrastructure/HttpLeadGateway'
 import { CreateLeadErrorsDTO } from '@/core/dtos/CreateLeadDTO'
 
@@ -69,15 +75,39 @@ function handleFieldBlur(field: keyof CreateLeadErrorsDTO) {
     errors.value.nome = CreateLeadDTOValidator.validateNome(formData.nome)
   }
   if (field === 'telefone') {
-    errors.value.telefone = CreateLeadDTOValidator.validateTelefone(
-      formData.telefone.replace(/[^\d]/g, ''),
-    )
+    errors.value.telefone = CreateLeadDTOValidator.validateTelefone(formData.telefone)
   }
   if (field === 'pedido') {
     errors.value.pedido = CreateLeadDTOValidator.validatePedido(formData.pedido)
   }
   if (field === 'quantidade') {
     errors.value.quantidade = CreateLeadDTOValidator.validateQuantidade(formData.quantidade)
+  }
+}
+
+function handlePhoneInput(event: Event) {
+  const target = event.target as HTMLInputElement
+  const value = target.value
+
+  formData.telefone = PhoneMasks.phone(value)
+}
+
+function handlePhoneKeydown(event: KeyboardEvent) {
+  const allowedKeys = [
+    'Backspace',
+    'Delete',
+    'Tab',
+    'Escape',
+    'Enter',
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowUp',
+    'ArrowDown',
+  ]
+  const isNumber = /^[0-9]$/.test(event.key)
+
+  if (!isNumber && !allowedKeys.includes(event.key)) {
+    event.preventDefault()
   }
 }
 </script>
@@ -117,8 +147,11 @@ function handleFieldBlur(field: keyof CreateLeadErrorsDTO) {
               type="tel"
               class="form-input"
               :class="{ error: hasFieldError('telefone') }"
+              @input="handlePhoneInput"
+              @keydown="handlePhoneKeydown"
               @blur="handleFieldBlur('telefone')"
               placeholder="(11) 99999-9999"
+              maxlength="15"
               required
             />
             <span v-if="hasFieldError('telefone')" class="error-message">
