@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import Banner from '../organisms/Banner.vue'
-import AboutSection from '../organisms/AboutSection.vue'
+import AboutSection from '../organisms/AboutSection/AboutSection.vue'
+import Banner from '../organisms/Banner/Banner.vue'
+import LeadForm from '../organisms/LeadForm/LeadForm.vue'
 
 interface Props {
   ofertaSemana: string
@@ -18,6 +19,8 @@ defineProps<Props>()
       :subtitle="ofertaSemana"
       height="400px"
     />
+
+    <LeadForm :oferta-semana="ofertaSemana" />
 
     <AboutSection />
 
