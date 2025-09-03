@@ -34,7 +34,7 @@ defineOptions({
 
         <div class="about-features">
           <div class="feature">
-            <div class="feature-icon">🎂</div>
+            <img class="feature-icon" src="/icons/cake.png" alt="Qualidade Premium" />
             <BaseTitle :level="3" size="medium" color="secondary">Qualidade Premium</BaseTitle>
             <BaseText size="medium" color="dark"
               >Ingredientes selecionados e técnicas artesanais</BaseText
@@ -42,7 +42,7 @@ defineOptions({
           </div>
 
           <div class="feature">
-            <div class="feature-icon">🌟</div>
+            <img class="feature-icon" src="/icons/star.png" alt="Qualidade Premium" />
             <BaseTitle :level="3" size="medium" color="secondary">Experiência Única</BaseTitle>
             <BaseText size="medium" color="dark"
               >Cada cliente recebe atenção personalizada e produtos feitos sob medida</BaseText
@@ -50,7 +50,7 @@ defineOptions({
           </div>
 
           <div class="feature">
-            <div class="feature-icon">❤️</div>
+            <img class="feature-icon" src="/icons/heart.png" alt="Qualidade Premium" />
             <BaseTitle :level="3" size="medium" color="secondary">Amor & Dedicação</BaseTitle>
             <BaseText size="medium" color="dark"
               >Cada produto é feito com carinho e atenção aos detalhes</BaseText
@@ -132,7 +132,8 @@ defineOptions({
 }
 
 .feature-icon {
-  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
   margin-bottom: 1rem;
 }
 
