@@ -1,13 +1,13 @@
 import type { ILeadGateway } from '../interfaces/ILeadGateway'
+import type { IConfigService } from '../interfaces/IConfigService'
 import { Lead } from '../entities/Lead'
 
 export class HttpLeadGateway implements ILeadGateway {
-  //Refatorar depois
-  constructor(private readonly apiUrl: string) {}
+  constructor(private readonly configService: IConfigService) {}
 
   async save(lead: Lead): Promise<void> {
     try {
-      const response = await fetch(`${this.apiUrl}/leads`, {
+      const response = await fetch(`${this.configService.getApiBaseUrl()}/leads`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

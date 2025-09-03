@@ -6,18 +6,16 @@ import {
   CreateLeadDTOValidator,
   CreateLeadUseCase,
   PhoneMasks,
+  HttpLeadGateway,
+  AppConfig,
 } from '@/core'
-import { HttpLeadGateway } from '@/core/infrastructure/HttpLeadGateway'
 import { CreateLeadErrorsDTO } from '@/core/dtos/CreateLeadDTO'
 
 interface Props {
-  apiUrl?: string
   ofertaSemana: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  apiUrl: 'https://api.exemplo.com',
-})
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
   success: []
@@ -46,7 +44,8 @@ async function handleSubmit() {
 
     const lead = Lead.create(formData)
 
-    const leadRepository = new HttpLeadGateway(props.apiUrl)
+    const configService = AppConfig.getInstance()
+    const leadRepository = new HttpLeadGateway(configService)
     const createLeadUseCase = new CreateLeadUseCase(leadRepository)
 
     await createLeadUseCase.createLead(lead)

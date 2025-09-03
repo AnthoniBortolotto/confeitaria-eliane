@@ -4,6 +4,7 @@ export { Lead } from './entities/Lead'
 // Interfaces
 export type { ILeadService } from './interfaces/ILeadService'
 export type { ILeadRepository } from './interfaces/ILeadRepository'
+export type { IConfigService } from './interfaces/IConfigService'
 
 // Use Cases
 export { CreateLeadUseCase } from './use-cases/CreateLeadUseCase'
@@ -14,6 +15,10 @@ export { CreateLeadDTOValidator, CreateLeadErrorsDTO } from './dtos/CreateLeadDT
 
 // Infrastructure
 export { HttpLeadRepository } from './infrastructure/HttpLeadRepository'
+export { HttpLeadGateway } from './infrastructure/HttpLeadGateway'
+
+// Config
+export { AppConfig } from './config/AppConfig'
 
 // Utils
 export { PhoneMasks } from './utils/phoneMask'
