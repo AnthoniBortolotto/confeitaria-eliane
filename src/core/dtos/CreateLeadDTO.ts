@@ -5,6 +5,7 @@ export interface CreateLeadDTO {
   telefone: string
   pedido: string
   quantidade: string
+  dataHoraColeta: string
 }
 
 export class CreateLeadErrorsDTO {
@@ -12,6 +13,7 @@ export class CreateLeadErrorsDTO {
   telefone: string = ''
   pedido: string = ''
   quantidade: string = ''
+  dataHoraColeta: string = ''
 
   static create(): CreateLeadErrorsDTO {
     return new CreateLeadErrorsDTO()
@@ -26,6 +28,7 @@ export class CreateLeadDTOValidator {
     errors.telefone = this.validateTelefone(dto.telefone)
     errors.pedido = this.validatePedido(dto.pedido)
     errors.quantidade = this.validateQuantidade(dto.quantidade)
+    errors.dataHoraColeta = this.validateDataHoraColeta(dto.dataHoraColeta)
 
     const hasErrors = Object.values(errors).some((error) => error !== '')
 
@@ -70,6 +73,31 @@ export class CreateLeadDTOValidator {
     if (!quantityRegex.test(quantidade)) {
       return 'Quantidade inválida'
     }
+    return ''
+  }
+
+  static validateDataHoraColeta(dataHoraColeta: string): string {
+    if (!dataHoraColeta.trim()) {
+      return 'Data e hora da coleta são obrigatórias'
+    }
+
+    const dateTime = new Date(dataHoraColeta)
+    const now = new Date()
+
+    if (isNaN(dateTime.getTime())) {
+      return 'Data e hora inválidas'
+    }
+
+    if (dateTime <= now) {
+      return 'A data e hora devem ser futuras'
+    }
+
+    const oneMonthFromNow = new Date()
+    oneMonthFromNow.setMonth(oneMonthFromNow.getMonth() + 1)
+    if (dateTime > oneMonthFromNow) {
+      return 'A data não pode ser mais de 1 mês no futuro'
+    }
+
     return ''
   }
 }

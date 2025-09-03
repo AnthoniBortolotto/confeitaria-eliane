@@ -28,6 +28,7 @@ const formData = reactive<CreateLeadDTO>({
   telefone: '',
   pedido: props.ofertaSemana,
   quantidade: '',
+  dataHoraColeta: '',
 })
 
 const errors = ref<CreateLeadErrorsDTO>(CreateLeadErrorsDTO.create())
@@ -55,6 +56,7 @@ async function handleSubmit() {
       nome: '',
       telefone: '',
       quantidade: '',
+      dataHoraColeta: '',
     })
 
     emit('success')
@@ -82,6 +84,11 @@ function handleFieldBlur(field: keyof CreateLeadErrorsDTO) {
   if (field === 'quantidade') {
     errors.value.quantidade = CreateLeadDTOValidator.validateQuantidade(formData.quantidade)
   }
+  if (field === 'dataHoraColeta') {
+    errors.value.dataHoraColeta = CreateLeadDTOValidator.validateDataHoraColeta(
+      formData.dataHoraColeta,
+    )
+  }
 }
 
 function handlePhoneInput(event: Event) {
@@ -108,6 +115,17 @@ function handlePhoneKeydown(event: KeyboardEvent) {
   if (!isNumber && !allowedKeys.includes(event.key)) {
     event.preventDefault()
   }
+}
+
+function getCurrentDateTimeLocal(): string {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`
 }
 </script>
 
@@ -174,6 +192,25 @@ function handlePhoneKeydown(event: KeyboardEvent) {
             />
             <span v-if="hasFieldError('quantidade')" class="error-message">
               {{ errors.quantidade }}
+            </span>
+          </div>
+
+          <div class="form-group">
+            <label for="dataHoraColeta" class="form-label"
+              >Em que momento você pode buscar o seu pedido? *</label
+            >
+            <input
+              id="dataHoraColeta"
+              v-model="formData.dataHoraColeta"
+              type="datetime-local"
+              class="form-input"
+              :class="{ error: hasFieldError('dataHoraColeta') }"
+              @blur="handleFieldBlur('dataHoraColeta')"
+              :min="getCurrentDateTimeLocal()"
+              required
+            />
+            <span v-if="hasFieldError('dataHoraColeta')" class="error-message">
+              {{ errors.dataHoraColeta }}
             </span>
           </div>
         </div>
