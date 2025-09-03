@@ -1,4 +1,5 @@
 import { PhoneMasks } from '../utils/phoneMask'
+import type { CreateLeadDTO } from '../dtos/CreateLeadDTO'
 
 export class Lead {
   constructor(
@@ -28,24 +29,8 @@ export class Lead {
     return this._quantidade
   }
 
-  static create(nome: string, telefone: string, pedido: string, quantidade: string): Lead {
-    if (!nome || nome.trim().length === 0) {
-      throw new Error('Nome é obrigatório')
-    }
-
-    if (!telefone || telefone.trim().length === 0) {
-      throw new Error('Telefone é obrigatório')
-    }
-
-    if (!pedido || pedido.trim().length === 0) {
-      throw new Error('Pedido é obrigatório')
-    }
-
-    if (!quantidade || quantidade.trim().length === 0) {
-      throw new Error('Quantidade é obrigatória')
-    }
-
-    return new Lead(nome.trim(), telefone.trim(), pedido.trim(), quantidade.trim())
+  static create(dto: CreateLeadDTO): Lead {
+    return new Lead(dto.nome.trim(), dto.telefone.trim(), dto.pedido.trim(), dto.quantidade.trim())
   }
 
   toJSON() {

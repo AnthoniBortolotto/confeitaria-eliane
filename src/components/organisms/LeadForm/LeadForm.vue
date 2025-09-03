@@ -44,7 +44,7 @@ async function handleSubmit() {
       return
     }
 
-    const lead = Lead.create(formData.nome, formData.telefone, formData.pedido, formData.quantidade)
+    const lead = Lead.create(formData)
 
     const leadRepository = new HttpLeadGateway(props.apiUrl)
     const createLeadUseCase = new CreateLeadUseCase(leadRepository)
