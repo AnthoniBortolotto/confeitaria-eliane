@@ -2,6 +2,7 @@
 import AboutSection from '../organisms/AboutSection/AboutSection.vue'
 import Banner from '../organisms/Banner/Banner.vue'
 import LeadForm from '../organisms/LeadForm/LeadForm.vue'
+import SiteFooter from '../organisms/Footer/SiteFooter.vue'
 
 interface Props {
   ofertaSemana: string
@@ -27,15 +28,20 @@ defineProps<Props>()
     <main class="main-content">
       <slot />
     </main>
+
+    <SiteFooter />
   </div>
 </template>
 
 <style scoped>
 .main-layout {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content {
   padding: 2rem;
+  flex: 1;
 }
 </style>
