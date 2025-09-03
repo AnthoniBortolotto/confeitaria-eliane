@@ -197,7 +197,7 @@ function getCurrentDateTimeLocal(): string {
 
           <div class="form-group">
             <label for="dataHoraColeta" class="form-label"
-              >Em que momento você pode buscar o seu pedido? *</label
+              >Quando você pode buscar o seu pedido?</label
             >
             <input
               id="dataHoraColeta"
