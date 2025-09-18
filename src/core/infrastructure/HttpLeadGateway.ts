@@ -7,7 +7,7 @@ export class HttpLeadGateway implements ILeadGateway {
 
   async save(lead: Lead): Promise<void> {
     try {
-      const response = await fetch(`${this.configService.getApiBaseUrl()}/leads`, {
+      const response = await fetch(`${this.configService.getApiBaseUrl()}/enviar-pedido`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

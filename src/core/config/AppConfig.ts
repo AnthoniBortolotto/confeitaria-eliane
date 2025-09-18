@@ -12,6 +12,9 @@ export class AppConfig implements IConfigService {
   private constructor() {
     this.config = {
       apiBaseUrl: import.meta.env.VITE_API_BASE_URL || 'https://api.exemplo.com',
+      whatsapp: import.meta.env.VITE_WHATSAPP,
+      email: import.meta.env.VITE_EMAIL,
+      place: import.meta.env.VITE_PLACE,
     }
   }
 
@@ -30,6 +33,15 @@ export class AppConfig implements IConfigService {
    */
   getApiBaseUrl(): string {
     return this.config.apiBaseUrl
+  }
+  getWhatsapp(): string {
+    return this.config.whatsapp
+  }
+  getEmail(): string {
+    return this.config.email
+  }
+  getPlace(): string {
+    return this.config.place
   }
 
   /**

@@ -26,11 +26,18 @@ import FooterSection from '../../molecules/FooterSection/FooterSection.vue'
 import ContactInfo from '../../molecules/ContactInfo/ContactInfo.vue'
 import ScheduleInfo from '../../molecules/ScheduleInfo/ScheduleInfo.vue'
 import FooterBottom from '../../molecules/FooterBottom/FooterBottom.vue'
+import { AppConfig } from '@/core'
+
+const configService = AppConfig.getInstance()
+
+const whatsapp = configService.getWhatsapp()
+const email = configService.getEmail()
+const place = configService.getPlace()
 
 const contactData = [
-  { icon: '/icons/whatsapp.svg', text: '(49) 984133347' },
-  { icon: '/icons/email.svg', text: 'eliane@gmail.com' },
-  { icon: '/icons/place.svg', text: 'Jardinópolis, SC' },
+  { icon: '/icons/whatsapp.svg', text: whatsapp },
+  { icon: '/icons/email.svg', text: email },
+  { icon: '/icons/place.svg', text: place },
 ]
 
 const scheduleData = [
