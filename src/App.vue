@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import MainLayout from './components/templates/MainLayout.vue'
 
-const ofertaSemana = ref('bombom de morango')
-const bannerImage = ref('./banner-bombom-de-morango.jpg')
+const ofertaSemana = ref('Donuts')
+const bannerImage = ref('./banner-donut.jpg')
 </script>
 
 <template>
