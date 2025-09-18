@@ -10,6 +10,7 @@ import {
   AppConfig,
 } from '@/core'
 import { CreateLeadErrorsDTO } from '@/core/dtos/CreateLeadDTO'
+import { useToast } from '@/composables/useToast'
 
 interface Props {
   ofertaSemana: string
@@ -22,6 +23,7 @@ const emit = defineEmits<{
   error: CreateLeadErrorsDTO
 }>()
 
+const { success: showSuccessToast, error: showErrorToast } = useToast()
 const isLoading = ref(false)
 const formData = reactive<CreateLeadDTO>({
   nome: '',
@@ -51,7 +53,6 @@ async function handleSubmit() {
 
     await createLeadUseCase.createLead(lead)
 
-    // Submit success, reset form
     Object.assign(formData, {
       nome: '',
       telefone: '',
@@ -59,9 +60,12 @@ async function handleSubmit() {
       dataHoraColeta: '',
     })
 
+    showSuccessToast('Pedido enviado com sucesso!')
+
     emit('success')
-  } catch {
-    //Implement default error message
+  } catch (error) {
+    showErrorToast('Erro ao enviar pedido. Tente novamente ou entre em contato conosco.')
+    console.error('Erro ao enviar lead:', error)
   } finally {
     isLoading.value = false
   }

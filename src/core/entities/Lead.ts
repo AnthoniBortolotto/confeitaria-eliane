@@ -48,7 +48,6 @@ export class Lead {
     return {
       nome: this._nome,
       telefone: this._telefone,
-      telefoneNumeros: this.telefoneNumeros,
       pedido: this._pedido,
       quantidade: this._quantidade,
       dataHoraColeta: this._dataHoraColeta,

@@ -3,6 +3,7 @@ import AboutSection from '../organisms/AboutSection/AboutSection.vue'
 import Banner from '../organisms/Banner/Banner.vue'
 import LeadForm from '../organisms/LeadForm/LeadForm.vue'
 import SiteFooter from '../organisms/Footer/SiteFooter.vue'
+import ToastNotification from '../atoms/ToastNotification/ToastNotification.vue'
 
 interface Props {
   ofertaSemana: string
@@ -13,7 +14,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div class="main-layout">
+  <main class="main-layout">
     <Banner
       :background-image="bannerImage"
       title="Oferta da Semana"
@@ -25,12 +26,10 @@ defineProps<Props>()
 
     <AboutSection />
 
-    <main class="main-content">
-      <slot />
-    </main>
-
     <SiteFooter />
-  </div>
+
+    <ToastNotification />
+  </main>
 </template>
 
 <style scoped>
@@ -42,6 +41,7 @@ defineProps<Props>()
 
 .main-content {
   padding: 2rem;
+  padding-bottom: 0;
   flex: 1;
 }
 </style>

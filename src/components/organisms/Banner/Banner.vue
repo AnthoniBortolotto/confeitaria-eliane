@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="banner-container">
+  <section class="banner-container">
     <div
       class="banner"
       :style="{ height: props.height, backgroundImage: `url(${backgroundImage})` }"
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
         <BannerContent :title="title" :subtitle="subtitle" />
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
